@@ -41,13 +41,14 @@ Available providers:
 - `deepl`
 - `deepl_free` - free version of DeepL API
 - `microsoft_translate`
+- `openai_translate`
 
 ```
 divante_translation:
     api_key: 
     source_lang:
     provider:  # default provider: google_translate
-    formality: # working for providers deepl and deepl_free only.
+    formality: # working for providers deepl and deepl_free and openai_translate only.
 ```
 
 #### DeepL Formality:
@@ -58,6 +59,15 @@ Possible options are:\
 "default" (default)\
 "more" - for a more formal language\
 "less" - for a more informal language\
+
+#### OpenAI Formality:
+Sets which language model is used for processing requests. Each model varies in capabilities, performance, and cost.
+
+Available Models:\
+gpt-4-turbo – Optimized for performance and cost\
+gpt-4, gpt-4-32k – Standard versions\
+gpt-3.5-turbo, gpt-3.5 – Cheaper, faster alternatives\
+
 
 ### Enable the Bundle:
 ```bash

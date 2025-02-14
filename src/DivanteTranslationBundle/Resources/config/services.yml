@@ -1,26 +1,29 @@
 services:
-    _instanceof:
-      DivanteTranslationBundle\Provider\ProviderInterface:
-          tags: ['translation_bundle.provider']
+  _instanceof:
+    DivanteTranslationBundle\Provider\ProviderInterface:
+      tags: ['translation_bundle.provider']
 
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        public: false
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
 
-    DivanteTranslationBundle\Controller\:
-        resource: '../../Controller'
-        public: true
-        arguments:
-            - '%divante_translation.source_lang%'
-            - '%divante_translation.provider%'
-        tags: ['controller.service_arguments']
+  DivanteTranslationBundle\Controller\:
+    resource: '../../Controller'
+    public: true
+    arguments:
+      - '%divante_translation.source_lang%'
+      - '%divante_translation.provider%'
+    tags: ['controller.service_arguments']
 
-    DivanteTranslationBundle\Provider\:
-      resource: '../../Provider'
+  DivanteTranslationBundle\Provider\:
+    resource: '../../Provider'
 
-    DivanteTranslationBundle\Provider\ProviderFactory:
-        arguments:
-            $apiKey: '%divante_translation.api_key%'
-            $providers: !tagged translation_bundle.provider
-            $formality: '%divante_translation.formality%'
+  DivanteTranslationBundle\Provider\ProviderFactory:
+    arguments:
+      $apiKey: '%divante_translation.api_key%'
+      $providers: !tagged translation_bundle.provider
+      $formality: '%divante_translation.formality%'
+
+  DivanteTranslationBundle\Http\:
+    resource: '../../Http'
