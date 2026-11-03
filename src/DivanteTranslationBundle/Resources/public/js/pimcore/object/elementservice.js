@@ -62,9 +62,19 @@ function handleTranslationRequest(id, fieldName, component, type, lang, formalit
 
             if (res.success) {
                 switch (type) {
-                    case 'wysiwyg':
-                        tinymce.activeEditor.setContent(res.data);
+                    case 'wysiwyg': {
+                        // Target this field's own editor - tinymce.activeEditor is whichever editor
+                        // was focused/initialized last, which may belong to another field.
+                        const editor = tinymce.get(component.editableDivId);
+                        if (editor) {
+                            editor.setContent(res.data);
+                        } else {
+                            Ext.get(component.editableDivId).dom.innerHTML = res.data;
+                        }
+                        // setContent() fires no input event, so mark the field dirty explicitly.
+                        component.setValue(res.data);
                         break;
+                    }
                     case 'input':
                         component.setRawValue(res.data);
                         break;
